@@ -11,7 +11,7 @@ void clear(queue<string> &q)
     swap(q,empty);
 }
 
-int main()
+int main(int argc, char *argv[])
 {
     ifstream fin;
     ofstream fout;
@@ -21,7 +21,11 @@ int main()
     int now,numofpeak;
     stringstream s;
     string nowString;
-    fin.open("matrix.data");
+    stringstream location;
+    stringstream outlocation;
+    location<<"./"<<argv[1]<<"/matrix.data";
+    outlocation<<"./"<<argv[1]<<"/final.peak";
+    fin.open(location.str());
 
     fin>>row>>col;
     for(int i=0;i<row;i++)
@@ -58,14 +62,18 @@ int main()
     }
 
     fin.close();
+    fout.open(outlocation.str(),ios::out);
+    cout<<numofpeak<<endl;
+    fout<<numofpeak<<endl;
 
     while(!ans.empty())
     {
         cout<<ans.front()<<endl;
+        fout<<ans.front()<<endl;
         ans.pop();
     }
-    cout<<peak<<endl<<numofpeak<<endl;
-    cout<<ans.size()<<endl;
+    fout.close();
+
     return 0;
 
 }
